@@ -11,12 +11,6 @@ import ForgotPassword from './components/forgot_pass.jsx';
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    {/* <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<LoginPage />} />
-        <Route path="/forgot-password" element={<ForgotPassword />} />
-      </Routes>
-    </BrowserRouter> */}
-    <Profile/>
+    <App/>
   </StrictMode>,
 )

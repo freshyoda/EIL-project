@@ -1,8 +1,8 @@
-// src/components/Header.jsx
+import { Bell, Search, User, ArrowLeft } from "lucide-react";
 import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-const Header = ({ currentPage, onNavigate }) => {
+export default function HRHeader({ title = "HR Dashboard", onBack, canGoBack }) {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const navigate = useNavigate();
   // useRef to create a reference to the profile button and dropdown for click detection
@@ -30,7 +30,7 @@ const Header = ({ currentPage, onNavigate }) => {
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
-  }, []); // Empty dependency array means this effect runs once on mount and cleans up on unmount
+  }, []);
 
   const toggleDropdown = (event) => {
     // Stop propagation to prevent the document-level click listener from immediately closing it
@@ -49,39 +49,46 @@ const Header = ({ currentPage, onNavigate }) => {
     navigate('/');
   };
 
-  const capitalizeName = (name) => {
-    return name.toUpperCase();
-  };
-  return (
-    <header className="mb-4 text-black">
-      <div className="bg-primary_main text-white p-4 shadow-md flex justify-between items-center sticky top-0">
-        <img src="./src/assets/eil_logo_60_transformation.png" alt="EIL"></img>
-        <nav className="flex items-center space-x-4">
-          <ul className="flex space-x-4 text-white">
-            <li>
-              <button
-                onClick={() => onNavigate('dashboard')}
-                className={`px-3 py-2 text-lg rounded-md transition-colors duration-200 bg-transparent hover:bg-gray-200 hover:text-gray-900 font-normal`}
-              >
-                EMPLOYEE DASHBOARD
-              </button>
-              <button
-                onClick={() => onNavigate('leaves section')}
-                className={`px-3 py-2 text-lg rounded-md transition-colors duration-200 bg-transparent hover:bg-gray-200 hover:text-gray-900 font-normal`}
-              >
-                LEAVES SECTIONS
-              </button>
-            </li>
-          </ul>
+  const backButtonClasses = `p-2 rounded-lg transition-colors duration-200 ${
+    canGoBack 
+      ? 'text-gray-400 hover:text-gray-600 hover:bg-gray-100' 
+      : 'text-gray-300 cursor-not-allowed'
+  }`;
 
-          {/* Profile Icon and Dropdown */}
-          <div className="relative ml-4">
+  return (
+    <header className="bg-white border-b border-gray-200 px-6 py-4">
+      <div className="flex items-center justify-between">
+        <div className="flex items-center space-x-4">
+          <button
+            onClick={canGoBack ? onBack : undefined}
+            className={backButtonClasses}
+            disabled={!canGoBack}
+          >
+            <ArrowLeft className="w-5 h-5" />
+          </button>
+          <div>
+            <h1 className="text-2xl font-bold text-gray-900">{title}</h1>
+            <p className="text-gray-600">Engineers India Limited</p>
+          </div>
+        </div>
+
+        <div className="flex items-center space-x-4">
+          <div className="relative">
+            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
+            <input
+              type="text"
+              placeholder="Search..."
+              className="pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            />
+          </div>
+
+          <div className="flex items-center space-x-3">
             <button
               ref={profileButtonRef} // Attach ref to the button
               onClick={toggleDropdown}
               className="bg-transparent border-none"
             >
-              <img src="./src/assets/profile.svg" alt="Profile" className="w-[7] h-[7] border-2 border-white rounded-full p-1" ></img>
+              <img src="../../../src/assets/profile.svg" alt="Profile" className="w-[7] h-[7] border-2 border-white rounded-full p-1 bg-blue-900" ></img>
             </button>
 
             {/* Dropdown Menu */}
@@ -102,14 +109,10 @@ const Header = ({ currentPage, onNavigate }) => {
                 </button>
               </div>
             )}
+            <span className="text-gray-700 font-medium">Admin</span>
           </div>
-        </nav>
-      </div>
-      <div className="bg-secondary_main text-white h-[180px] flex items-center justify-center">
-        <span className='text-white text-[30px] font-semibold'>{capitalizeName(currentPage)}</span>
+        </div>
       </div>
     </header>
   );
-};
-
-export default Header;
+}

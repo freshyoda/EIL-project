@@ -2,79 +2,467 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  line-height: 1.5;
-  font-weight: 400;
-
-  color-scheme: light;
-  
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
-}
-
-#login-body {
-  background-image: url('./src/assets/EILPHOTO.jpg');
-}
-
 body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  /* min-width: 320px;
-  min-height: 100vh; */
-  background-color: #ffffff;
-  font-family: 'Raleway', sans-serif;
-}
-
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-}
-
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  /* background-color: #1a1a1a; */
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
-
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
-}
-
-/* login page */
-#username, #password {
   background-color: white;
+}
+
+:root {
+  --background: hsl(0, 0%, 100%);
+  --foreground: hsl(20, 14.3%, 4.1%);
+  --muted: hsl(60, 4.8%, 95.9%);
+  --muted-foreground: hsl(25, 5.3%, 44.7%);
+  --popover: hsl(0, 0%, 100%);
+  --popover-foreground: hsl(20, 14.3%, 4.1%);
+  --card: hsl(0, 0%, 100%);
+  --card-foreground: hsl(20, 14.3%, 4.1%);
+  --border: hsl(20, 5.9%, 90%);
+  --input: hsl(20, 5.9%, 90%);
+  --primary: hsl(207, 90%, 54%);
+  --primary-foreground: hsl(211, 100%, 99%);
+  --secondary: hsl(60, 4.8%, 95.9%);
+  --secondary-foreground: hsl(24, 9.8%, 10%);
+  --accent: hsl(60, 4.8%, 95.9%);
+  --accent-foreground: hsl(24, 9.8%, 10%);
+  --destructive: hsl(0, 84.2%, 60.2%);
+  --destructive-foreground: hsl(60, 9.1%, 97.8%);
+  --ring: hsl(20, 14.3%, 4.1%);
+  --radius: 0.5rem;
+  
+  /* EIL Brand Colors - Enhanced for HR Dashboard */
+  --eil-blue: #1e3d72;
+  --eil-blue-light: #2563eb;
+  --eil-blue-dark: #1e40af;
+  --eil-success: hsl(142, 71%, 45%);
+  --eil-warning: hsl(38, 92%, 50%);
+  --eil-error: hsl(0, 84%, 60%);
+  --eil-gray-50: hsl(210, 20%, 98%);
+  --eil-gray-100: hsl(220, 14%, 96%);
+  --eil-gray-200: hsl(220, 13%, 91%);
+  --eil-gray-600: hsl(220, 9%, 46%);
+  --eil-gray-900: hsl(220, 39%, 11%);
+}
+
+.dark {
+  --background: hsl(240, 10%, 3.9%);
+  --foreground: hsl(0, 0%, 98%);
+  --muted: hsl(240, 3.7%, 15.9%);
+  --muted-foreground: hsl(240, 5%, 64.9%);
+  --popover: hsl(240, 10%, 3.9%);
+  --popover-foreground: hsl(0, 0%, 98%);
+  --card: hsl(240, 10%, 3.9%);
+  --card-foreground: hsl(0, 0%, 98%);
+  --border: hsl(240, 3.7%, 15.9%);
+  --input: hsl(240, 3.7%, 15.9%);
+  --primary: hsl(207, 90%, 54%);
+  --primary-foreground: hsl(211, 100%, 99%);
+  --secondary: hsl(240, 3.7%, 15.9%);
+  --secondary-foreground: hsl(0, 0%, 98%);
+  --accent: hsl(240, 3.7%, 15.9%);
+  --accent-foreground: hsl(0, 0%, 98%);
+  --destructive: hsl(0, 62.8%, 30.6%);
+  --destructive-foreground: hsl(0, 0%, 98%);
+  --ring: hsl(240, 4.9%, 83.9%);
+  --radius: 0.5rem;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply font-sans antialiased bg-background text-foreground;
+  }
+}
+
+/* EIL Custom Styles - Original + HR Dashboard Enhanced */
+.eil-blue {
+  background-color: var(--eil-blue);
+}
+
+.text-eil-blue {
+  color: var(--eil-blue);
+}
+
+.border-eil-blue {
+  border-color: var(--eil-blue);
+}
+
+.hover\:bg-eil-blue:hover {
+  background-color: var(--eil-blue);
+}
+
+.bg-eil-blue-light {
+  background-color: var(--eil-blue-light);
+}
+
+.bg-eil-blue-dark {
+  background-color: var(--eil-blue-dark);
+}
+
+.bg-eil-success {
+  background-color: var(--eil-success);
+}
+
+.text-eil-success {
+  color: var(--eil-success);
+}
+
+.bg-eil-warning {
+  background-color: var(--eil-warning);
+}
+
+.text-eil-warning {
+  color: var(--eil-warning);
+}
+
+.bg-eil-error {
+  background-color: var(--eil-error);
+}
+
+.text-eil-error {
+  color: var(--eil-error);
+}
+
+/* Custom scrollbar - Enhanced */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: hsl(var(--muted));
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--eil-blue);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--eil-blue-dark);
+}
+
+/* HR Dashboard specific scrollbar */
+.hr-scrollbar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.hr-scrollbar::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+
+.hr-scrollbar::-webkit-scrollbar-thumb {
+  background: var(--eil-blue);
+  border-radius: 3px;
+}
+
+.hr-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: var(--eil-blue-dark);
+}
+
+/* Professional animations - Enhanced */
+.fade-in {
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.slide-in {
+  animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+/* HR Dashboard Enhanced Styles */
+
+/* Card hover effects */
+.hr-card {
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.hr-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+/* Status badges */
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Button styles */
+.btn-primary {
+  background-color: var(--eil-blue);
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.btn-primary:hover {
+  background-color: var(--eil-blue-dark);
+}
+
+.btn-secondary {
+  background-color: #f8fafc;
+  color: #334155;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  border: 1px solid #e2e8f0;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.btn-secondary:hover {
+  background-color: #f1f5f9;
+  border-color: #cbd5e1;
+}
+
+/* Table styles */
+.hr-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.hr-table th {
+  background-color: #f8fafc;
+  padding: 0.75rem;
+  text-align: left;
+  font-weight: 600;
+  color: #475569;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.hr-table td {
+  padding: 0.75rem;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.hr-table tr:hover {
+  background-color: #f8fafc;
+}
+
+/* Modal styles */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 50;
+}
+
+.modal-content {
+  background: white;
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+  width: 100%;
+  max-width: 28rem;
+  margin: 1rem;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+}
+
+/* Form styles */
+.form-input {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #d1d5db;
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: var(--eil-blue);
+  box-shadow: 0 0 0 3px rgba(30, 61, 114, 0.1);
+}
+
+.form-select {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #d1d5db;
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  background-color: white;
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e");
+  background-position: right 0.5rem center;
+  background-repeat: no-repeat;
+  background-size: 1.5em 1.5em;
+  padding-right: 2.5rem;
+  transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.form-select:focus {
+  outline: none;
+  border-color: var(--eil-blue);
+  box-shadow: 0 0 0 3px rgba(30, 61, 114, 0.1);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .hr-dashboard-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .hr-sidebar {
+    width: 100%;
+    height: auto;
+    position: relative;
+  }
+  
+  .hr-main-content {
+    margin-left: 0;
+  }
+}
+
+/* Loading spinner */
+.spinner {
+  border: 2px solid #f3f4f6;
+  border-top: 2px solid var(--eil-blue);
+  border-radius: 50%;
+  width: 1rem;
+  height: 1rem;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Success/Error messages */
+.alert-success {
+  background-color: #f0fdf4;
+  border: 1px solid #bbf7d0;
+  color: #166534;
+  padding: 0.75rem;
+  border-radius: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.alert-error {
+  background-color: #fef2f2;
+  border: 1px solid #fecaca;
+  color: #dc2626;
+  padding: 0.75rem;
+  border-radius: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+/* Progress bars */
+.progress-bar {
+  width: 100%;
+  height: 0.5rem;
+  background-color: #e5e7eb;
+  border-radius: 0.25rem;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background-color: var(--eil-blue);
+  transition: width 0.3s ease-in-out;
+}
+
+/* HR Dashboard specific utility classes */
+.bg-blue-900 {
+  background-color: var(--eil-blue) !important;
+}
+
+.hover\:bg-blue-800:hover {
+  background-color: var(--eil-blue-dark) !important;
+}
+
+.text-blue-900 {
+  color: var(--eil-blue) !important;
+}
+
+.border-blue-600 {
+  border-color: var(--eil-blue-light);
+}
+
+.border-blue-700 {
+  border-color: var(--eil-blue);
+}
+
+.bg-blue-600 {
+  background-color: var(--eil-blue-light);
+}
+
+.bg-blue-700 {
+  background-color: var(--eil-blue);
+}
+
+.text-blue-200 {
+  color: #bfdbfe;
+}
+
+.text-blue-100 {
+  color: #dbeafe;
+}
+
+/* Enhanced focus states for better accessibility */
+input:focus,
+select:focus,
+textarea:focus,
+button:focus {
+  outline: 2px solid var(--eil-blue);
+  outline-offset: 2px;
+}
+
+/* Ensure proper contrast for dark text on light backgrounds */
+.bg-white {
+  background-color: white;
+}
+
+/* Print styles for reports */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+  
+  .print-full-width {
+    width: 100% !important;
+  }
+  
+  .hr-table {
+    font-size: 12px;
+  }
+  
+  .hr-table th,
+  .hr-table td {
+    padding: 0.5rem;
+  }
 }
